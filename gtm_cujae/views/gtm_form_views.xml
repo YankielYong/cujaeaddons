@@ -1,0 +1,28 @@
+<odoo>
+    <record id="gtm_form_view" model="ir.ui.view">
+        <field name="name">Agregar formulario de viaje a Helpdesk Ticket</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='main']" position="inside">
+                <field name="travel_form_id"
+                       string="Formulario de viaje"
+                       placeholder="Selecciona el formulario de viaje"/>
+                <field name="travel_expense_id" invisible="1"/>
+                <button
+                    name="action_open_expense"
+                    string="Gestionar Planilla de Costos"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible': [('travel_expense_id', '!=', False)]}"
+                />
+                <field
+                    name="travel_expense_id"
+                    readonly="1"
+                    attrs="{'invisible': [('travel_expense_id', '=', False)]}"
+                    widget="many2one_clickable"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

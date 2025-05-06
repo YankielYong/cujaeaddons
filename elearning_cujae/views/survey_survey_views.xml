@@ -1,21 +1,36 @@
 <odoo>
-<data>
-   <record id="survey_survey_view_form_inherited" model="ir.ui.view">
-    <field name="name">survey.survey.view.form_inherited</field>
-    <field name="model">survey.survey</field>
-    <field name="inherit_id" ref="survey.survey_survey_view_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//group[@name='scoring']" position="inside">
-            <label for="exam" attrs="{'invisible': [('scoring_type', '=', 'no_scoring')],'readonly':[('certification', '=', True)]}"/> 
-            <div class="o_checkbox_optional_field" attrs="{'invisible': [('scoring_type', '=', 'no_scoring')]}">
-                <field name="exam" nolabel="1" attrs="{'readonly':[('certification', '=', True)]}"/>
-            </div>
-            <xpath expr="//div[hasclass('o_checkbox_optional_field')]" position="inside">
-                <field name="certification" attrs="{'invisible': [('scoring_type', '=', 'no_scoring')],'readonly': [('exam', '=', True)]}"/>
-            </xpath>
-        </xpath>
-    </field>
-</record>
-</data>
+    <data>
+        <record id="survey_survey_view_form_inherited" model="ir.ui.view">
+            <field name="name">survey.survey.view.form_inherited</field>
+            <field name="model">survey.survey</field>
+            <field name="inherit_id" ref="survey.survey_survey_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='scoring']" position="inside">
+                    <label for="exam" attrs="{'invisible': [('scoring_type', '=', 'no_scoring')],'readonly':[('certification', '=', True)]}"/>
+                    <div class="o_checkbox_optional_field" attrs="{'invisible': [('scoring_type', '=', 'no_scoring')]}">
+                        <field name="exam" nolabel="1" attrs="{'readonly':[('certification', '=', True)]}"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='certification']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('exam', '=', True)], 'invisible': [('scoring_type', '=', 'no_scoring')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='access_mode']" position="after">
+                    <field name="professor_check" readonly="1" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='scoring_success_min']" position="after">
+                    <field name="grade_ranges" attrs="{'invisible': [('scoring_type', '=', 'no_scoring')]}" required="1">
+                        <tree editable="bottom" >
+                            <field name="min_percentage" required="1"/>
+                            <field name="max_percentage" required="1"/>
+                            <field name="grade" required="1"/>
+                        </tree>
+                    </field>
+                </xpath>  
+            </field>
+        </record>
+    </data>
 </odoo>
+
+
 

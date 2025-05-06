@@ -25,4 +25,168 @@
             <field name="perm_create" eval="1"/>
             <field name="perm_unlink" eval="1"/>
         </record>
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data noupdate="0">
+        <record id="website_slides.group_website_slides_officer" model="res.groups">
+                    <field name="name">Professor</field>
+        </record>
+        <record model="res.groups" id="survey.group_survey_user">
+            <field name="name">Professor</field>
+        </record>
+
+         <!-- CHANNEL -->
+        <delete model="ir.rule" id="website_slides.rule_slide_channel_officer_cw" />
+        <delete model="ir.rule" id="website_slides.rule_slide_channel_officer_r" />
+        <delete model="ir.rule" id="website_slides.rule_slide_channel_not_website" />
+
+        <record id="rule_slide_channel_officer_crud" model="ir.rule">
+            <field name="name">Channel: professor: crud own only</field>
+            <field name="model_id" ref="website_slides.model_slide_channel"/>
+            <field name="domain_force">['&amp;', ('user_ids', 'in', [user.id]), ('company_id', 'in', user.company_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('website_slides.group_website_slides_officer'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+
+        <record id="rule_slide_channel_not_website_internal" model="ir.rule">
+            <field name="name">Channel: public/portal/user: restricted to published, company, and (public or member)</field>
+            <field name="model_id" ref="model_slide_channel"/>
+            <field name="groups" eval="[(4, ref('base.group_public')), (4, ref('base.group_portal'))]"/>
+            <field name="domain_force">
+                ['&amp;',
+                    ('company_id', 'in', user.company_ids.ids),
+                    '&amp;',
+                        ('website_published', '=', True),
+                        '|',
+                            ('visibility', '=', 'public'),
+                            ('partner_ids', '=', user.partner_id.id)
+                ]
+            </field>
+            <field name="perm_unlink" eval="0"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="0"/>
+        </record>
+        <!-- SURVEY -->
+        <delete model="ir.rule" id="survey.survey_survey_rule_survey_user_read" />
+        <delete model="ir.rule" id="survey.survey_survey_rule_survey_user_cwu" />
+        <delete model="ir.rule" id="survey.survey_question_rule_survey_user_read" />
+        <delete model="ir.rule" id="survey.survey_question_rule_survey_user_cw" />
+        <delete model="ir.rule" id="survey.survey_question_answer_rule_survey_user_read" />
+        <delete model="ir.rule" id="survey.survey_question_answer_rule_survey_user_cw" />
+        <delete model="ir.rule" id="survey.survey_user_input_rule_survey_user_read" />
+        <delete model="ir.rule" id="survey.survey_user_input_rule_survey_user_cw" />
+        <delete model="ir.rule" id="survey.survey_user_input_line_rule_survey_user_read" />
+        <delete model="ir.rule" id="survey.survey_user_input_line_rule_survey_user_cw" />
+
+        <record id="survey_survey_rule_survey_user_crud" model="ir.rule">
+            <field name="name">Survey: professor: create/write/unlink own only</field>
+            <field name="model_id" ref="survey.model_survey_survey"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('survey.group_survey_user'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+
+        <record id="survey_question_rule_survey_user_crud" model="ir.rule">
+            <field name="name">Survey question: professor: create/write/unlink linked to own survey only</field>
+            <field name="model_id" ref="survey.model_survey_question"/>
+            <field name="domain_force">[('survey_id.create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('survey.group_survey_user'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+
+        <record id="survey_question_answer_rule_survey_user_crud" model="ir.rule">
+            <field name="name">Survey question answer: professor: create/write/unlink linked to own survey only</field>
+            <field name="model_id" ref="survey.model_survey_question_answer"/>
+            <field name="domain_force">['|', ('question_id.survey_id.create_uid', '=', user.id), ('matrix_question_id.survey_id.create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('survey.group_survey_user'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+
+        <!-- SURVEY: USER_INPUT, USER_INPUT_LINE -->
+        <record id="survey_user_input_rule_survey_user_crud" model="ir.rule">
+            <field name="name">Survey user input: professor: create/write/unlink linked to own survey only</field>
+            <field name="model_id" ref="survey.model_survey_user_input"/>
+            <field name="domain_force">[('survey_id.create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('survey.group_survey_user'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+
+        <record id="survey_user_input_line_rule_survey_user_crud" model="ir.rule">
+            <field name="name">Survey user input line: professor: create/write/unlink linked to own survey only</field>
+            <field name="model_id" ref="survey.model_survey_user_input_line"/>
+            <field name="domain_force">[('user_input_id.survey_id.create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('survey.group_survey_user'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+
+        <!-- SLIDE -->
+        <delete model="ir.rule" id="website_slides.rule_slide_slide_officer_cw" />
+        <delete model="ir.rule" id="website_slides.rule_slide_slide_officer_r" />
+        <delete model="ir.rule" id="website_slides.rule_slide_slide_not_website" />
+        <record id="rule_slide_slide_officer_cw" model="ir.rule">
+            <field name="name">Slide: professor: crud own only</field>
+            <field name="model_id" ref="model_slide_slide"/>
+            <field name="domain_force">[('user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('website_slides.group_website_slides_officer'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+        <!-- CHANNEL PARTNER -->
+        <delete model="ir.rule" id="website_slides.rule_slide_channel_partner_officer"/>
+        <record id="rule_slide_channel_partner_officer" model="ir.rule">
+            <field name="name">Channel Partner: professor: crud own only</field>
+            <field name="model_id" ref="website_slides.model_slide_channel_partner"/>
+            <field name="domain_force">[('channel_id.user_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('website_slides.group_website_slides_officer'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+        <!-- SLIDE PARTNER -->
+        <delete model="ir.rule" id="website_slides.rule_slide_slide_partner_officer"/>
+        <record id="rule_slide_slide_partner_officer" model="ir.rule">
+            <field name="name">Slide Partner: professor: crud own only</field>
+            <field name="model_id" ref="model_slide_slide_partner"/>
+            <field name="domain_force">[('channel_id.user_ids', 'in', [user.id])]</field>
+            <field name="groups" eval="[(4, ref('website_slides.group_website_slides_officer'))]"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+        </record>
+        <!--SLIDE RESOURCE-->
+        <delete model="ir.rule" id="website_slides.rule_slide_slide_resource_officer_read"/>
+
+        <record id="res_company_rule_portal" model="ir.rule">
+            <field name="name">Portal: Read allowed companies</field>
+            <field name="model_id" ref="base.model_res_company"/>
+            <field name="domain_force">[('id', 'in', user.company_ids.ids)]</field>
+            <field name="groups" eval="[(4, ref('base.group_portal')), (4, ref('base.group_user'))]"/>
+        </record>
+
+
+    </data>
 </odoo>

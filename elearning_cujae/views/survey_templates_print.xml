@@ -1,0 +1,20 @@
+<odoo>
+    <data>
+        <!-- Extender el template para char_box -->
+        <template id="survey_page_print_valid_answers" inherit_id="survey.survey_page_print">
+            <!-- Usamos un XPath más flexible para ubicar el bloque char_box -->
+            <xpath expr="//t[@t-call='survey.question_char_box']" position="after">
+                <t t-if="question.question_type == 'char_box' and question.valid_answer_ids">
+                    <div class="valid-answers-container mt-2">
+                        <strong class="text-success mt-1">Respuestas válidas aceptadas:</strong>
+                        <ul class="list-unstyled">
+                            <li class="text-success" t-foreach="question.valid_answer_ids" t-as="valid_answer">
+                                <span t-esc="valid_answer.value"/>
+                            </li>
+                        </ul>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

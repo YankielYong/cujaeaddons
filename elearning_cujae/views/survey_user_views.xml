@@ -1,0 +1,112 @@
+<odoo>
+    <record id="view_survey_user_input_line_form_inherit" model="ir.ui.view">
+        <field name="name">survey.user.input.line.form.inherit</field>
+        <field name="model">survey.user_input.line</field>
+        <field name="inherit_id" ref="survey.survey_user_input_line_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Eliminar grupos de answer_score -->
+            <xpath expr="//field[@name='answer_score']" position="attributes">
+                <attribute name="groups"/>
+            </xpath>            
+            
+            <!-- Agregar max_score después de answer_score -->
+            <xpath expr="//field[@name='answer_score']" position="after">
+                <field name="max_score"/>
+            </xpath>
+
+            <!-- Campos en modo solo lectura -->
+            <xpath expr="//field[@name='question_id']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='answer_type']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='skipped']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='value_text_box']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='matrix_row_id']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>            
+            <xpath expr="//field[@name='value_date']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='value_datetime']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='suggested_answer_id']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='create_date']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='value_char_box']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='value_numerical_box']" position="attributes">
+                <attribute name="attrs">{'readonly': True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='answer_score']" position="attributes">
+                <attribute name="attrs">{'readonly': False}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='suggested_answer_id']" position="after">
+                        <field name="value_file_data_ids" readonly="1">
+                            <tree>
+                                <field name="name"/>
+                                <field name="file_size"/>
+                                <field name="type"/>
+                            </tree>
+                        </field>
+            </xpath>
+        </field>
+    </record>
+    <record id="survey_user_input_view_form_inherit" model="ir.ui.view">
+               <field name="name">survey.user_input.view.form.inherit</field>
+               <field name="model">survey.user_input</field>
+               <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
+               <field name="arch" type="xml">
+                   <xpath expr="//field[@name='user_input_line_ids']" position="attributes">
+                        <attribute name="attrs">{'readonly': False}</attribute>
+                   </xpath>
+                   <xpath expr="//field[@name='create_date']" position="after">
+                        <field name="checked"/>
+                   </xpath>                   
+               </field>
+    </record>
+
+    <record id="view_survey_user_input_line_tree_inherit" model="ir.ui.view">
+        <field name="name">survey.user.input.line.tree.inherit</field>
+        <field name="model">survey.user_input.line</field>
+        <field name="inherit_id" ref="survey.survey_response_line_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='survey_id']" position="after">
+                <field name="slide_partner_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_survey_user_input_line_search_inherit" model="ir.ui.view">
+        <field name="name">survey.user.user_input_line.view.search.inherit</field>
+        <field name="model">survey.user_input.line</field>
+        <field name="inherit_id" ref="survey.survey_user_input_line_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='group_by_survey']" position="before">
+                <filter name="group_by_partner" string="Partner" domain="[]"  context="{'group_by':'slide_partner_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="survey.survey_user_input_line_action" model="ir.actions.act_window">
+        <field name="name">Detailed Answers</field> <!-- Opcional, pero recomendable para identificar la herencia -->
+        <field name="context">{'search_default_group_by_partner': True,'search_default_group_by_survey': True, 'search_default_group_by_user_input': True}</field>
+    </record>
+
+
+
+
+
+</odoo>
+
+           

@@ -1,6 +1,55 @@
 
 <odoo>
     <data>
+
+        <template id="course_slides_list_collapse" inherit_id="website_slides.course_slides_list">
+                <div t-att-data-channel-id="channel.id" position="attributes">
+                    <attribute name="class" separator=" " add="o_course_extended"/>
+                </div>
+                <div t-att-class="'d-flex align-items-center ps-3 %s' % ('o_wslides_slides_list_drag' if channel.can_publish else '')" position="attributes">
+                    <attribute name="data-toggle">collapse</attribute>
+                    <attribute name="t-att-data-target">'%s%s' % ('#slide-', category_id)</attribute>
+                    <attribute name="aria-expanded">true</attribute>
+                    <attribute name="t-att-aria-controls">'slide-%s' % (category_id)</attribute>
+                    <attribute name="role">button</attribute>
+                    <attribute name="id">collapse_div</attribute>
+                </div>
+                <xpath expr="//div[@t-if='channel.can_publish and category_id']" position="attributes">
+                    <attribute name="t-if">category_id</attribute>
+                </xpath>
+                <xpath expr="//div[@t-if='category_id']/i" position="replace">
+                    <i class="fa fa-minus"/>            
+                </xpath>
+                <ul class="list-unstyled pb-1 border-top" position="replace">
+                    <t t-if="category_id">
+                        <div class="collapse show" t-att-id="'slide-%s' % (category_id)">
+                            <ul t-att-data-category-id="category_id" class="list-unstyled pb-1 border-top">
+                                <li class="o_wslides_slides_list_slide o_not_editable border-0"/>
+                                <li class="o_wslides_js_slides_list_empty border-0"/>
+
+                                <t t-foreach="category['slides']" t-as="slide">
+                                    <!-- <t t-if="not slide.is_hide"> -->
+                                        <t t-call="website_slides.course_slides_list_slide" />
+                                    <!-- </t> -->
+                                    <t t-set="j" t-value="j+1"/>
+                                </t>
+                            </ul>
+                        </div>
+                    </t>
+                    <t t-if="not category_id">
+                        <ul t-att-data-category-id="category_id" class="list-unstyled pb-1 border-top">
+                            <li class="o_wslides_slides_list_slide o_not_editable border-0"/>
+                                <li class="o_wslides_js_slides_list_empty border-0"/>
+
+                            <t t-foreach="category['slides']" t-as="slide">
+                                <t t-call="website_slides.course_slides_list_slide" />
+                                <t t-set="j" t-value="j+1"/>
+                            </t>
+                        </ul>
+                    </t>
+                </ul>
+         </template>
+
          <template id="course_main_exam" inherit_id="website_slides.course_main" name="Exam Course Main">
             <xpath expr="//div[@id='wrap']" position="attributes">
                 <attribute name="t-attf-class" separator=" " add="#{'o_wss_exam_channel' if channel.nbr_exam > 0 else ''}"/>
@@ -38,6 +87,59 @@
         <template id="course_slides_list_inherit_survey_exam" inherit_id="website_slides.course_slides_list">
             <xpath expr="//div[hasclass('o_wslides_content_actions')]" position="inside">
                 <div class="o_wslides_survey_exam_upload_toast"/>
+            </xpath>
+        </template>
+
+        <template id="course_sidebar_inherit" inherit_id="website_slides.course_sidebar">
+            <xpath expr="//tr[@t-if='channel.total_time']" position="before">
+                <tr t-if="channel.availability_end_date">
+                    <th class="border-top-0">Fin de Disponibilidad</th>
+                    <td class="border-top-0">
+                        <t t-esc="channel.availability_end_date" t-options="{'widget': 'datetime'}"/>
+                    </td>
+                </tr>
+            </xpath>
+            <xpath expr="//tr[@t-if='channel.user_id']" position="replace">
+                <tr t-if="channel.user_ids">
+                    <th class="border-top-0">Responsibles</th>
+                    <td class="border-top-0 text-break">
+                       <t t-foreach="channel.user_ids" t-as="user">
+                           <span t-esc="user.display_name"/>
+                           <t t-if="not user_is_last"> </t>
+                       </t>
+                   </td>
+                </tr>
+            </xpath>
+        </template>
+        <template id="inherit_course_slides_list" inherit_id="website_slides.course_slides_list">
+            <!-- Condición original para miembros -->
+            <xpath expr="//div[hasclass('o_wslides_slides_list')]" position="attributes">
+                <attribute name="t-if">channel.is_member</attribute>
+            </xpath>
+            
+            <!-- Bloque para no miembros -->
+            <xpath expr="//div[hasclass('o_wslides_slides_list')]" position="after">
+                <t t-else="">
+                    <!-- Mostrar slides con preview -->
+                    <div class="o_wslides_slides_list">
+                        <t t-foreach="channel.slide_ids.filtered(lambda s: s.is_preview)" t-as="slide">
+                            <!-- Usar la misma estructura de template de slide -->
+                            <t t-call="website_slides.course_slides_list_slide">
+                                <t t-set="slide" t-value="slide"/>
+                                <t t-set="channel" t-value="channel"/>
+                                <t t-set="channel_progress" t-value="channel_progress"/>
+                                <t t-set="category_id" t-value="category_id"/>
+                                <t t-set="j" t-value="0"/> <!-- Ajustar índice si es necesario -->
+                            </t>
+                        </t>
+                    </div>
+                    
+                    <!-- Mensaje de unirse al curso -->
+                    <div class="alert alert-info mt-4">
+                        <i class="fa fa-info-circle me-2"/>
+                        Debes unirte al curso para acceder a todos los materiales de formación.
+                    </div>
+                </t>
             </xpath>
         </template>
     </data>

@@ -1,0 +1,12 @@
+<odoo>
+    <!-- Página de confirmación -->
+    <template id="submission_confirmation" name="Confirmación de Subida">
+        <t t-call="website.layout">
+            <div class="container mt-4">
+                <h1>¡Gracias por tu participación!</h1>
+                <p>Tu trabajo ha sido enviado correctamente.</p>
+                <a href="/" class="btn btn-primary">Volver al inicio</a>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -74,7 +74,7 @@ class WebsiteSlidesSurveyExam(WebsiteSlides):
                     'is_time_limited': False,
                     'scoring_type': 'scoring_without_answers',
                     'exam': True,
-                    'scoring_success_min': 70.0,
+                    'scoring_success_min': 80.0,
                     #'exam_mail_template_id': request.env.ref('survey.mail_template_exam').id,
                 }).id
             elif linked_exam_id:

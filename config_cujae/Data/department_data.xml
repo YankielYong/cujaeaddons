@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Departamentos principales de CUJAE -->
+        <record id="dep_cemat" model="hr.department">
+            <field name="name">CEMAT</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="dep_citi" model="hr.department">
+            <field name="name">CITI</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="dep_relaciones_internacionales" model="hr.department">
+            <field name="name">Relaciones internacionales</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="dep_recursos_humanos" model="hr.department">
+            <field name="name">Recursos humanos</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="dep_ceis" model="hr.department">
+            <field name="name">CEIS</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="dep_comunicaciones" model="hr.department">
+            <field name="name">Comunicaciones</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <record id="dep_ceti" model="hr.department">
+            <field name="name">CETI</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Departamentos de la Facultad de Informática -->
+        <record id="dep_informatica_inteligencia_computacional" model="hr.department">
+            <field name="name">Inteligencia computacional</field>
+            <field name="company_id" ref="company_informatica"/>
+        </record>
+
+        <record id="dep_informatica_ingenieria_software" model="hr.department">
+            <field name="name">Ingeniería de software</field>
+            <field name="company_id" ref="company_informatica"/>
+        </record>
+
+        <record id="dep_informatica_sigenu" model="hr.department">
+            <field name="name">SIGENU</field>
+            <field name="company_id" ref="company_informatica"/>
+        </record>
+
+        <record id="dep_informatica_dis" model="hr.department">
+            <field name="name">DIS</field>
+            <field name="company_id" ref="company_informatica"/>
+        </record>
+
+        <!-- Opcional: Estructura jerárquica si es necesaria -->
+        <!-- Ejemplo de departamento con padre:
+        <record id="dep_subdepartamento" model="hr.department">
+            <field name="name">Subdepartamento</field>
+            <field name="parent_id" ref="dep_cemat"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        -->
+    </data>
+</odoo>

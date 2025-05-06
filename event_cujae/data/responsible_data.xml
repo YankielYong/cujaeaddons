@@ -1,0 +1,84 @@
+<odoo>
+    <data noupdate="1">
+        <record id="responsible_architecture" model="faculty.responsible">
+            <field name="name">Decanato</field>
+            <field name="faculty_id" ref="faculty_architecture"/>
+        </record>
+        <record id="responsible_architecture_2" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="faculty_architecture"/>
+        </record>
+        <record id="responsible_civil_engineering" model="faculty.responsible">
+            <field name="name">Decanato</field>
+            <field name="faculty_id" ref="faculty_civil_engineering"/>
+        </record>
+        <record id="responsible_civil_engineering_2" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="faculty_civil_engineering"/>
+        </record>
+        <record id="responsible_electrical_engineering" model="faculty.responsible">
+            <field name="name">Decanato</field>
+            <field name="faculty_id" ref="faculty_electrical_engineering"/>
+        </record>
+        <record id="responsible_electrical_engineering_2" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="faculty_electrical_engineering"/>
+        </record>
+        <record id="responsible_industrial_engineering" model="faculty.responsible">
+            <field name="name">Decanato</field>
+            <field name="faculty_id" ref="faculty_industrial_engineering"/>
+        </record>
+        <record id="responsible_industrial_engineering_2" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="faculty_industrial_engineering"/>
+        </record>
+        <record id="responsible_computer_engineering" model="faculty.responsible">
+            <field name="name">Decanato</field>
+            <field name="faculty_id" ref="faculty_computer_engineering"/>
+        </record>
+        <record id="responsible_computer_engineering_2" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="faculty_computer_engineering"/>
+        </record>
+        <record id="responsible_chemical_engineering" model="faculty.responsible">
+            <field name="name">Decanato</field>
+            <field name="faculty_id" ref="faculty_chemical_engineering"/>
+        </record>
+        <record id="responsible_chemical_engineering_2" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="faculty_chemical_engineering"/>
+        </record>
+         <record id="responsible_mechanical_engineering" model="faculty.responsible">
+            <field name="name">Decanato</field>
+            <field name="faculty_id" ref="faculty_mechanical_engineering"/>
+        </record>
+        <record id="responsible_mechanical_engineering_2" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="faculty_mechanical_engineering"/>
+        </record>
+         <record id="responsible_automatic_and_biomedical_engineering" model="faculty.responsible">
+            <field name="name">Decanato</field>
+            <field name="faculty_id" ref="faculty_automatic_and_biomedical_engineering"/>
+        </record>
+        <record id="responsible_automatic_and_biomedical_engineering_2" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="faculty_automatic_and_biomedical_engineering"/>
+        </record>
+        <record id="responsible_telecom_and_electronics_engineering" model="faculty.responsible">
+            <field name="name">Decanato</field>
+            <field name="faculty_id" ref="faculty_telecom_and_electronics_engineering"/>
+        </record>
+        <record id="responsible_telecom_and_electronics_engineering_2" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="faculty_telecom_and_electronics_engineering"/>
+        </record>
+         <record id="responsible_CUJAE" model="faculty.responsible">
+            <field name="name">Rectoria</field>
+            <field name="faculty_id" ref="CUJAE"/>
+        </record>
+        <record id="responsible_CUJAE" model="faculty.responsible">
+            <field name="name">FEU</field>
+            <field name="faculty_id" ref="CUJAE"/>
+        </record>
+    </data>
+</odoo>

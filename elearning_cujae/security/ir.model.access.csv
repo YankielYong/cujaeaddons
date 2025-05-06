@@ -1,1 +1,15 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+website_slides.access_slide_slide_officer,slide.slide.officer,website_slides.model_slide_slide,website_slides.group_website_slides_officer,1,1,1,1
+website_slides.access_slide_slide_partner_system,slide.slide.partner.system,website_slides.model_slide_slide_partner,website_slides.group_website_slides_officer,1,1,1,1
+website_slides.access_slide_question_officer,slide.question.officer,website_slides.model_slide_question,website_slides.group_website_slides_officer,1,1,1,1
+website_slides.access_slide_answer_officer,slide.answer.officer,website_slides.model_slide_answer,website_slides.group_website_slides_officer,1,1,1,1
+website_slides.access_slide_tag_officer,slide.tag.officer,website_slides.model_slide_tag,website_slides.group_website_slides_officer,1,1,1,1
+website_slides.access_slide_channel_tag_user,slide.channel.tag.user,website_slides.model_slide_channel_tag,website_slides.group_website_slides_officer,1,1,1,1
+website_slides.access_slide_channel_tag_group_user,slide.channel.tag.group.user,website_slides.model_slide_channel_tag_group,website_slides.group_website_slides_officer,1,1,1,1
+website_slides.access_slide_channel_officer,slide.channel.officer,website_slides.model_slide_channel,website_slides.group_website_slides_officer,1,1,1,1
+website_slides.access_slide_slide_resource_publisher,slide.slide.resource.publisher,website_slides.model_slide_slide_resource,website_slides.group_website_slides_officer,1,1,1,1
+survey.access_validanswers_user,survey.valid.answer.user,elearning_cujae.model_survey_question_valid_answer,base.group_user,1,1,1,1
+survey.access_surveygrade_user,survey.grade.user,elearning_cujae.model_survey_grade_range,base.group_user,1,1,1,1
+survey.access_survey_user_input_line_survey_user,survey.user_input.line.survey.professor,survey.model_survey_user_input_line,survey.group_survey_user,1,1,1,0
+access_question_wizard,access_question_wizard,elearning_cujae.model_question_wizard,base.group_user,1,1,1,1
+

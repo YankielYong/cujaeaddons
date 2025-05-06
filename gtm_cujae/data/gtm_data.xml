@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Categorías para los trámites-->
+    <!-- Categorías para Trámites Migratorios -->
+    <record id="category_viaje_exterior" model="helpdesk.ticket.category">
+        <field name="name">Solicitud de Viaje al Exterior</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="category_aplicar_beca" model="helpdesk.ticket.category">
+        <field name="name">Solicitud para Aplicar a Beca</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <!-- Categorías para Trámites Económicos -->
+    <record id="category_travel_loan" model="helpdesk.ticket.category">
+        <field name="name">Solicitud de Préstamo</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- Tipos de trámites-->
+    <record id="type_tramites_migratorios" model="helpdesk.ticket.type">
+        <field name="name">Trámites Migratorios</field>
+    </record>
+    <record id="type_tramites_economicos" model="helpdesk.ticket.type">
+        <field name="name">Trámites Económicos</field>
+    </record>
+
+    <!-- Equipo principal para trámites migratorios (asignado por defecto) -->
+    <record id="team_grupo_tramites_migratorios" model="helpdesk.ticket.team">
+        <field name="name">Grupo de Trámites Migratorios</field>
+        <field name="active">True</field>
+        <field name="type_ids" eval="[(6, 0, [ref('type_tramites_migratorios')])]"/>
+        <field name="company_id" eval="False"/> <!-- Válido para todas las compañías -->
+        <field name="color">1</field> <!-- Color opcional (1=Rojo, 2=Verde, etc.) -->
+        <field name="user_ids" eval="[(6, 0, [])]"/> <!-- Asigna usuarios manualmente o déjalo vacío -->
+    </record>
+
+    <!-- Equipos adicionales (opcionales) -->
+    <record id="team_departamento_economia" model="helpdesk.ticket.team">
+        <field name="name">Departamento de Economía</field>
+        <field name="active">True</field>
+        <field name="type_ids" eval="[(6, 0, [ref('type_tramites_economicos')])]"/>
+        <field name="company_id" eval="False"/>
+        <field name="color">2</field>
+    </record>
+
+    <record id="team_secretario_pcc" model="helpdesk.ticket.team">
+        <field name="name">Secretario del PCC</field>
+        <field name="active">True</field>
+        <field name="type_ids" eval="[(6, 0, [])]"/>
+        <field name="company_id" eval="False"/>
+        <field name="color">3</field>
+    </record>
+
+    <record id="team_secretario_ujc" model="helpdesk.ticket.team">
+        <field name="name">Secretario de la UJC</field>
+        <field name="active">True</field>
+        <field name="type_ids" eval="[(6, 0, [])]"/>
+        <field name="company_id" eval="False"/>
+        <field name="color">4</field>
+    </record>
+
+</odoo>

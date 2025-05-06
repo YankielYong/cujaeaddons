@@ -1,0 +1,7 @@
+<odoo>
+     <menuitem name="Trabajos Enviados"
+        id="event_cujae_work_item_menu"
+        parent="event.event_main_menu"
+        sequence="4"
+        action="action_scientific_work"/>
+</odoo>

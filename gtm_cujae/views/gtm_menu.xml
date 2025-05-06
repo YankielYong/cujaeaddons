@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+<!-- Actions -->
+    <record id="travel_form_action" model="ir.actions.act_window">
+        <field name="name">Solicitudes de viaje</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">travel.form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+<!-- Action -->
+    <record id="travel_expense_action" model="ir.actions.act_window">
+        <field name="name">Costos de Viaje</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">travel.expense</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+<!-- Top menu -->
+    <menuitem
+        id="gtm_main_menu"
+        name="Trámites Migratorios"
+        sequence="13"
+    />
+<!-- Submenu -->
+    <menuitem
+        id="gtm_travel_form"
+        name="Formularios de solicitudes de viaje"
+        parent="gtm_main_menu"
+        action="travel_form_action"
+        sequence="1"
+    />
+    <menuitem
+        id="gtm_travel_expense"
+        name="Planillas de costos de viaje"
+        parent="gtm_main_menu"
+        action="travel_expense_action"
+        sequence="5"
+    />
+
+
+</odoo>

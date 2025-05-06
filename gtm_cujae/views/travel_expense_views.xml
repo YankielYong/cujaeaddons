@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="travel_expense_view_tree" model="ir.ui.view">
+        <field name="name">travel.expense.tree</field>
+        <field name="model">travel.expense</field>
+        <field name="arch" type="xml">
+            <tree string="Planillas de costos de viaje">
+                <field name="name"/>
+                <field name="ticket_id"/>
+                <field name="traveler_name"/>
+                <field name="total_travel_cost" string="Costo total del viaje"/>
+                <field name="pocket_money"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="travel_expense_view_form" model="ir.ui.view">
+        <field name="name">travel.expense.form</field>
+        <field name="model">travel.expense</field>
+        <field name="arch" type="xml">
+            <form string="Costos del viaje">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="ticket_id"/>
+                            <field name="traveler_name"/>
+                        </group>
+                        <group>
+                            <field name="total_travel_cost"/>
+                            <field name="sponsor"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="ticket_cost"/>
+                        <field name="taxes"/>
+                        <field name="diet_cost"/>
+                        <field name="accommodation_cost"/>
+                        <field name="medical_insurance_cost"/>
+                        <field name="pocket_money"/>
+                        <field name="other_expenses"/>
+                    </group>
+                    <group>
+                        <field name="other_expenses_specification" attrs="{'invisible': [('other_expenses', '=', 0)],
+                                                                      'required': [('other_expenses', '!=', 0)]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="travel_expense_action" model="ir.actions.act_window">
+        <field name="name">Costos del Viaje</field>
+        <field name="res_model">travel.expense</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

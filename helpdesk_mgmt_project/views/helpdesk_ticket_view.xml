@@ -12,7 +12,7 @@
         <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_tree" />
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="project_id" />
+                <field name="project_id"/>
             </field>
         </field>
     </record>
@@ -22,7 +22,7 @@
         <field name="inherit_id" ref="helpdesk_mgmt.helpdesk_ticket_view_search" />
         <field name="arch" type="xml">
             <field name="user_id" position="after">
-                <field name="project_id" />
+                <field name="project_id"/>
                 <field name="task_id" />
             </field>
         </field>
@@ -33,7 +33,7 @@
         <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_email']" position="after">
-                <field name="project_id" />
+                <field name="project_id"/>
                 <field
                     name="task_id"
                     domain="[('project_id', '=', project_id)]"

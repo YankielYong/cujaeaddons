@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+
+    
+    <record id="slide_channel_partner_view_tree_inherit" model="ir.ui.view">
+        <field name="name">slide.channel.partner.view.tree.inherit</field>
+        <field name="model">slide.channel.partner</field>
+        <field name="inherit_id" ref="website_slides.slide_channel_partner_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='channel_user_id']" position="replace">
+                <field name="channel_user_ids" string="Responsibles" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="slide_channel_partner_view_kanban_inherit" model="ir.ui.view">
+        <field name="name">slide.channel.partner.view.kanban.inherit</field>
+        <field name="model">slide.channel.partner</field>
+        <field name="inherit_id" ref="website_slides.slide_channel_partner_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='channel_user_id']" position="replace">
+                <field name="channel_user_ids" string="Responsibles" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>    
+
+</data></odoo>

@@ -13,12 +13,87 @@
                     </t>
                 </t>
             </xpath>
+            <xpath expr="//t[@t-if='answer.scoring_success']" position="before">
+                <t t-if="answer.professor_check and answer.checked">
+                    <div>Your final grade is <strong><t t-esc="answer.grade" /></strong></div>
+                </t>
+                <t t-elif="answer.professor_check">
+                    <div><strong>Your final grade will be given by the professor</strong></div>
+                </t>
+                <t t-else="">
+                    <div>Your grade is <strong><t t-esc="answer.grade" /></strong></div>
+                </t>
+            </xpath>
         </template>
 
         <template id="o_wss_certification_icon">
             <t t-set="icon_url" t-value="icon_url if icon_url else '/website_slides_survey/static/src/img/certification.svg'"/>
             <t t-set="icon_classes" t-value="icon_classes if icon_classes else 'o_wss_certification_icon'"/>
             <img t-att-class="icon_classes" t-att-src="icon_url" alt="Certification icon"/>
+        </template>
+
+        <!--    if question_type= upload file then t-call template-->
+        <template id="question_page_upload_answer"
+                inherit_id="survey.question_container">
+            <xpath expr="//div[@role='alert']" position="before">
+                <t t-if="question.question_type == 'upload_file'">
+                    <t t-call="elearning_cujae.multi_upload_file"/>
+                </t>
+            </xpath>
+        </template>
+    <!--    Answer View-->
+        <template id="multi_upload_file">
+            <div class="o_survey_upload_container">
+                <div class="o_survey_upload_box">
+                    <div class="o_survey_upload_box_header">Subir arhivo</div>
+                    <br/>
+                    <div class="o_survey_upload_box_body">
+                        <input type="file" class="o_survey_upload_file"
+                            data-oe-data=""
+                            data-oe-file_name=""
+                            t-att-data-question-type="question.question_type"
+                            t-att-name="question.id"
+                            t-att-multiple="question.upload_multiple_file"
+                        />
+                    </div>
+                </div>
+                <br/>
+                <div id="fileList" class="o_survey_upload_list"/>
+                <t t-if="question.upload_multiple_file == False">
+                    <div class="o_survey_upload_note">Nota: Solamente puedes subir uno
+                        file.
+                    </div>
+                </t>
+                <t t-if="question.upload_multiple_file == True">
+                    <div class="o_survey_upload_note">Nota: Puedes subir varios archivos
+                    </div>
+                </t>
+            </div>
+        </template>
+    <!--Show the answer in print page if question type = upload file then t-call template-->
+        <template id="survey_page_print_upload_answer"
+                inherit_id="survey.survey_page_print">
+            <xpath expr="//div[hasclass('o_survey_question_error')]"
+                position="before">
+                <t t-if="question.question_type == 'upload_file'">
+                    <t t-call="elearning_cujae.multi_upload_answer"/>
+                </t>
+            </xpath>
+        </template>
+    <!--Answer Value attachments-->
+        <template id="multi_upload_answer">
+            <t t-if="answer_lines.value_file_data_ids">
+                <div>
+                    <t t-foreach="answer_lines.value_file_data_ids"
+                    t-as="attachment">
+                        <a t-attf-href="/web/content/{{ attachment.id }}?download=true">
+                            <i class="fa fa-download"/>
+                            <t t-esc="attachment.name"/>
+                        </a>
+                        <br/>
+                    </t>
+                </div>
+            </t>
         </template>
 
         <template id="true_false_question_container" inherit_id="survey.question_container">

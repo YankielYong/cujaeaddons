@@ -1,0 +1,14 @@
+<odoo>
+    <data noupdate="1">
+        <record id="mail_server_outgoing" model="ir.mail_server">
+            <field name="name">Servidor de Correo Saliente</field>
+            <field name="smtp_host">smtp.gmail.com</field>
+            <field name="smtp_port">587</field>
+            <field name="smtp_user">tu_email@gmail.com</field>
+            <field name="smtp_pass">tu_contraseña_o_token</field>
+            <field name="smtp_encryption">starttls</field>
+            <field name="sequence">1</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>

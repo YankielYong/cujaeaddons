@@ -1,0 +1,99 @@
+<odoo>
+    <record id='travel_form_action' model="ir.actions.act_window">
+        <field name="name">Solicitudes de viaje</field>
+        <field name="res_model">travel.form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="travel_form_view_form" model="ir.ui.view">
+        <field name="name">travel.form.view.form</field>
+        <field name="model">travel.form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                    </group>
+                    <group name="basic_info">
+                        <group string="Información personal">
+                            <field name="traveler_name"/>
+                            <field name="id_number"/>
+                            <field name="gender"/>
+                            <field name="personal_address"/>
+                            <field name="personal_email"/>
+                            <field name="work_email"/>
+                            <field name="personal_telephone_number"/>
+                            <field name="applicant_type"/>
+                            <field name="applicant_area" attrs="{'invisible': [('applicant_type', 'in', ['student', 'external'])]}"/>
+                            <field name="teaching_category" attrs="{'invisible': [('applicant_type', 'in', ['student', 'external'])]}"/>
+                            <field name="academic_category" attrs="{'invisible': [('applicant_type', 'in', ['student', 'external'])]}"/>
+                            <!--
+                            <field name="civil_status"/>
+                            <field name="has_child"/>
+                            <field name="children_situation" attrs="{'invisible': [('has_child', '=', False)],
+                                                                  'required': [('has_child', '!=', False)]}"/>
+                                                                  -->
+                        </group>
+                        <group string="Información del viaje">
+                            <field name="country"/>
+                            <field name="foreign_institution" placeholder="Nombre del centro de estudios donde trabajará o recibirá clases"/>
+                            <field name="departure_date"/>
+                            <field name="return_date"/>
+                            <field name="travel_concept"/>
+                            <field name="sponsor"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Objetivos del viaje" name="travel_objective">
+                            <group>
+                                <field name="travel_objective" widget="Html" placeholder="Profundizar en los objetivos del viaje, plan de actividades, tareas a realizar y resultados esperados"/>
+                            </group>
+                        </page>
+                        <page string="Antecedentes" name="records">
+                            <group>
+                                <field name="records" widget="Html" placeholder="Si no ha realizado viajes anteriormente deje este campo vacío"/>
+                            </group>
+                        </page>
+                        <page string="Fundamentación del viaje" name="travel_fundament">
+                            <group>
+                                <field name="sub_teacher"
+                                       help="Profesor que cubrirá sus labores docentes"
+                                       attrs="{'invisible': [('applicant_type', 'in', ['student', 'external'])],
+                                        'required': [('applicant_type', 'in', ['teacher', 'staff'])]}"
+                                       placeholder="Especifique en el caso de que no imparta clases"/>
+                                <field name="sub_researcher"
+                                       help="Persona que cubrirá sus labores investigativas"
+                                       attrs="{'invisible': [('applicant_type', 'in', ['student', 'external'])],
+                                        'required': [('applicant_type', 'in', ['teacher', 'staff'])]}"
+                                       placeholder="Especifique en el caso de que no forme parte de ninguna investigación"/>
+                                <field name="rank_n_subs"
+                                       help="Persona(s) que asumirán los cargos que ostenta"
+                                       attrs="{'invisible': [('applicant_type', 'in', ['external'])],
+                                           'required': [('applicant_type', 'in', ['student', 'teacher', 'staff'])]}"
+                                       placeholder="Si no ocupa ningún cargo, deje este campo vacío"/>
+                                <field name="invitation_letter" placeholder="Suba aquí la carta de invitación"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista tree para travel.form -->
+    <record id="travel_form_view_tree" model="ir.ui.view">
+        <field name="name">travel.form.view.tree</field>
+        <field name="model">travel.form</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Código de solicitud"/>
+                <field name="traveler_name" string="Nombre del Viajero"/>
+                <field name="country" string="País"/>
+                <field name="departure_date"/>
+                <field name="return_date"/>
+                <field name="travel_concept" string="Concepto del viaje"/>
+                <field name="work_email" string="Correo institucional"/>
+                <field name="ticket_id" string="Código del ticket de solicitud de viaje"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

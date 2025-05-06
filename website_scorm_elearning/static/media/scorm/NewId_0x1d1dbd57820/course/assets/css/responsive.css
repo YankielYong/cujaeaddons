@@ -1,0 +1,289 @@
+
+
+.header-left .page-title h1 {
+    font-size: 22px; 
+}
+/*=================================================
+:: Responsive Media Query (less than 1600px)
+==================================================*/
+@media (max-width: 1600px) {    
+    .header-left { 
+        gap: 10px; 
+    }
+    .header-left .page-title h1 {
+        line-height: normal;
+    }
+    .header-lesson-no { 
+        font-size: 18px; 
+        padding: 12px 20px;
+        width: 220px;
+    }
+    .header-lesson-no a {
+        font-size: 16px; 
+    } 
+    .header-icon a { 
+        height: 49px;
+        width: 49px; 
+    }
+} 
+
+ 
+/*=================================================
+:: Responsive Media Query (less than 1280px)
+==================================================*/
+@media (max-width:1280px) {
+    .page-title{
+        /* display: none; */  
+        flex: 1;       
+    }
+    .header-left .page-title h1 {
+        font-size: 16px;
+    }
+}
+
+
+/*=================================================
+:: Responsive Media Query (less than 1199px)
+==================================================*/
+@media only screen and (min-width:992px) { 
+    /* .container, .container-md, .container-sm {
+        max-width: 992px;
+    }     */
+} 
+@media only screen and (max-width: 991px) { 
+    .container, .container-md, .container-sm {
+        max-width: 100%;
+    }
+    .mtb-90 {
+        margin-top: 40px !important;
+        margin-bottom: 40px !important;
+    }
+    .mtb-100 {
+        margin-top: 50px !important;
+        margin-bottom: 50px !important;
+    }
+    .mtb-110 {
+        margin-top: 60px !important;
+        margin-bottom: 60px !important;
+    }
+    .mtb-120 {
+        margin-top: 70px !important;
+        margin-bottom: 70px !important;
+    }
+    .mtb-130 {
+        margin-top: 80px !important;
+        margin-bottom: 80px !important;
+    }
+    .mtb-140 {
+        margin-top: 90px !important;
+        margin-bottom: 90px !important;
+    }
+    .mtb-150 {
+        margin-top: 100px !important;
+        margin-bottom: 100px !important;
+    }
+    .ptb-90 {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+    .ptb-100 {
+        padding-top: 50px !important;
+        padding-bottom: 50px !important;
+    }
+    .ptb-110 {
+        padding-top: 60px !important;
+        padding-bottom: 60px !important;
+    }
+    .ptb-120 {
+        padding-top: 70px !important;
+        padding-bottom: 70px !important;
+    }
+    .ptb-130 {
+        padding-top: 80px !important;
+        padding-bottom: 80px !important;
+    }
+    .ptb-140 {
+        padding-top: 90px !important;
+        padding-bottom: 90px !important;
+    }
+    .ptb-150 {
+        padding-top: 100px !important;
+        padding-bottom: 100px !important;
+    }
+    /* helper classes */
+    .grid-1 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .grid-5 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .grid-6 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }   
+    .mobile-hunger {
+        display: block;
+    }
+    .header-icon ul {
+        display: none;
+    }
+    .header-lesson-no {
+        width: auto;
+        padding: 5px;
+    }   
+} 
+
+/*=================================================
+:: Responsive Media Query (less than 767px)
+==================================================*/
+@media only screen and (max-width: 767px) {
+    .main-header {
+        height:150px;
+    }
+    .mtb-90 {
+        margin-top: 30px !important;
+        margin-bottom: 30px !important;
+    }
+    .mtb-100 {
+        margin-top: 40px !important;
+        margin-bottom: 40px !important;
+    }
+    .mtb-110 {
+        margin-top: 40px !important;
+        margin-bottom: 40px !important;
+    }
+    .mtb-120 {
+        margin-top: 50px !important;
+        margin-bottom: 50px !important;
+    }
+    .mtb-130 {
+        margin-top: 60px !important;
+        margin-bottom: 60px !important;
+    }
+    .mtb-140 {
+        margin-top: 70px !important;
+        margin-bottom: 70px !important;
+    }
+    .mtb-150 {
+        margin-top: 80px !important;
+        margin-bottom: 80px !important;
+    }
+    .ptb-90 {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+    .ptb-100 {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+    .ptb-110 {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+    .ptb-120 {
+        padding-top: 50px !important;
+        padding-bottom: 50px !important;
+    }
+    .ptb-130 {
+        padding-top: 60px !important;
+        padding-bottom: 60px !important;
+    }
+    .ptb-140 {
+        padding-top: 70px !important;
+        padding-bottom: 70px !important;
+    }
+    .ptb-150 {
+        padding-top: 80px !important;
+        padding-bottom: 80px !important;
+    }
+    /* helper classes */
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .grid-5 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .grid-6 {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }  
+    
+    .question-submit-btn  {
+        margin-top: 30px;
+    }
+
+    .header-left .page-title h1 {
+        font-size: 14px; 
+    }
+    
+}
+
+/*=================================================
+:: Responsive Media Query (less than 575px)
+==================================================*/
+@media (max-width:575px) {   
+    .logo a img {
+        /* width: 140px; */
+        display: inline-block;
+    }
+    .header-icon ul { 
+        gap: 10px; 
+    }
+    .header-right { 
+        gap: 10px;
+    }  
+
+    .lv-left {
+        width: 100%; 
+    }
+    .lv-tabs-box ul li a { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .lv-right { 
+        position: absolute;
+        width: 320px;
+    }  
+    .lv-main.sidebar-close .lv-right { 
+        width: 320px;
+        right: -320px;
+    }
+    .header-lesson-no {
+        font-size:12px;
+    }
+    #bookmark { width: 100%; left: 0%;}
+    
+} 
+
+/*=================================================
+:: Responsive Media Query (less than 320px)
+==================================================*/
+@media (max-width:320px) {
+}
+
+ 

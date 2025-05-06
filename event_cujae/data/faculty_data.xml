@@ -1,0 +1,34 @@
+<odoo>
+    <data noupdate="1">
+        <record id="faculty_architecture" model="university.faculty">
+            <field name="name">Arquitectura</field>
+        </record>
+        <record id="faculty_civil_engineering" model="university.faculty">
+            <field name="name">Ing. Civil</field>
+        </record>
+        <record id="faculty_electrical_engineering" model="university.faculty">
+            <field name="name">Ing. Eléctrica</field>
+        </record>
+        <record id="faculty_industrial_engineering" model="university.faculty">
+            <field name="name">Ing. Industrial</field>
+        </record>
+        <record id="faculty_computer_engineering" model="university.faculty">
+            <field name="name">Ing. Informática</field>
+        </record>
+        <record id="faculty_chemical_engineering" model="university.faculty">
+            <field name="name">Ing. Química</field>
+        </record>
+        <record id="faculty_mechanical_engineering" model="university.faculty">
+            <field name="name">Ing. Mecánica</field>
+        </record>
+        <record id="faculty_automatic_and_biomedical_engineering" model="university.faculty">
+            <field name="name">Ing. Automática y Biomédica</field>
+        </record>
+        <record id="faculty_telecom_and_electronics_engineering" model="university.faculty">
+            <field name="name">Ing. en Telecomunicaciones y Electrónica</field>
+        </record>
+        <record id="CUJAE" model="university.faculty">
+            <field name="name">CUJAE</field>
+        </record>
+    </data>
+</odoo>

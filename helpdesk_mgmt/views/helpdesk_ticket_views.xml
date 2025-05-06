@@ -161,10 +161,11 @@
                     </div>
                     <group name="main">
                         <group>
-                            <field name="active" invisible="1" />
+                            <field name="active" invisible="1"/>
+                            <field name="category_id"/>
                             <field name="team_id" options='{"always_reload": True}' />
-                            <field name="user_ids" invisible="1" readonly="1" />
-                            <field name="user_id" options='{"always_reload": True}' />
+                            <field name="user_ids" readonly="1" invisible="1"/>
+                            <field name="user_id" options='{"always_reload": True}'/>
                             <field name="priority" widget="priority" />
                             <field
                                 name="company_id"
@@ -178,13 +179,12 @@
                             <field name="partner_id" />
                             <field name="partner_name" />
                             <field name="partner_email" />
-                            <field name="category_id" />
                             <field
                                 name="tag_ids"
                                 widget="many2many_tags"
                                 options="{'no_create_edit': True, 'color_field': 'color',}"
                             />
-                            <field name="sequence" groups="base.group_no_one" />
+                            <field name="sequence" groups="base.group_no_one" invisible="1"/>
                         </group>
                     </group>
                     <notebook>

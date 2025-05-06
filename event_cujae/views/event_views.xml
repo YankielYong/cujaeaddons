@@ -1,0 +1,45 @@
+<odoo>
+    <record id="view_event_form_custom" model="ir.ui.view">
+        <field name="name">event.event.form.inherit</field>
+        <field name="model">event.event</field>
+        <field name="inherit_id" ref="event.view_event_form"/>
+        <field name="arch" type="xml">
+            <!-- Agregar el campo descripción después del nombre -->
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="descripcion" placeholder="Escribe la descripción del evento..." style="font-size: 12px;"/>
+            </xpath>
+
+            <!-- Ocultar el campo date_tz -->
+            <xpath expr="//field[@name='date_tz']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- Reemplazar organizer_id por organizer_faculty -->
+            <xpath expr="//field[@name='organizer_id']" position="replace">
+                <field name="organizer_faculty"/>
+            </xpath>
+
+            <!-- Reemplazar user_id por responsible_faculty con un dominio basado en organizer_faculty -->
+            <xpath expr="//field[@name='user_id']" position="replace">
+                <field name="responsible_faculty" domain="[('faculty_id', '=', organizer_faculty)]"/>
+            </xpath>
+
+            <!-- Agregar el campo event_type_name (invisible) -->
+            <xpath expr="//field[@name='responsible_faculty']" position="after">
+                <field name="event_type_name" invisible="1"/>
+            </xpath>
+
+            <!-- Agregar campos dinámicos después de un campo existente en la vista padre -->
+            <xpath expr="//field[@name='tag_ids']" position="after">
+
+               <field name="speaker_ids"
+                      widget="many2many_tags"
+                      domain="[('is_company', '=', False)]"
+                      attrs="{'invisible': [('event_type_name', '!=', 'Conferencia')]}"/>
+
+                <field name="submission_page_url"
+                       attrs="{'invisible': [('event_type_name', '!=', 'Científico')]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

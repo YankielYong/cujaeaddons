@@ -8,7 +8,7 @@
             <xpath expr="//field[@name='slide_category']" position="after">
                 <field name="exam_id"
                     attrs="{'invisible': [('slide_category', '!=', 'exam')], 'required': [('slide_category', '=', 'exam')]}"
-                    domain="[('exam', '=', True)]" context="{'default_certification': True, 'default_scoring_type': 'scoring_without_answers'}"/>
+                    domain="[('exam', '=', True)]" context="{'default_exam': True, 'default_scoring_type': 'scoring_without_answers'}"/>
             </xpath>
             <xpath expr="//field[@name='is_preview']" position="attributes">
                 <attribute name="attrs">{'invisible': [('slide_category', '=', 'exam')]}</attribute>
@@ -24,6 +24,10 @@
             <xpath expr="//field[@name='user_id']" position="after">
                 <field name="karma_for_completion" String="Karma al completar"/>
             </xpath>            
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="availability_start_date" required="1"/>
+                <field name="availability_end_date"/>
+            </xpath>            
         </field>
     </record>
    
@@ -34,7 +38,7 @@
         <field name="res_model">survey.survey</field>
         <field name="view_mode">kanban,tree,pivot,graph,form</field>
         <field name="domain">[('exam', '=', True)]</field>
-        <field name="context">{'default_certification': False, 'default_scoring_type': 'scoring_with_answers'}</field>
+        <field name="context">{'default_exam': True, 'default_scoring_type': 'scoring_with_answers'}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Crea un examen

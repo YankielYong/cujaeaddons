@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <record id="email_template_event_published" model="mail.template">
+            <field name="name">Evento Publicado</field>
+            <field name="model_id" ref="event.model_event_event"/>
+            <field name="subject">Nuevo Evento: ${object.name}</field>
+            <field name="email_from">${(object.user_id.email or 'no-reply@miempresa.com')|safe}</field>
+            <field name="body_html">
+                <![CDATA[
+                <p>¡Hola!</p>
+                <p>Un nuevo evento ha sido publicado:</p>
+                <ul>
+                    <li><strong>Nombre:</strong> ${object.name}</li>
+                    <li><strong>Fecha:</strong> ${object.date_begin}</li>
+                    <li><strong>Descripción:</strong> ${object.description or 'Sin descripción'}</li>
+                </ul>
+                <p>Gracias,</p>
+                <p>El equipo de Eventos</p>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -4,6 +4,7 @@
 from odoo.addons.survey.controllers import main
 from odoo import http
 from odoo.http import request
+from odoo.exceptions import UserError
 
 
 class SurveyExam(main.Survey):
@@ -41,6 +42,6 @@ class SurveyExam(main.Survey):
         ], limit=1)
 
         if not succeeded_attempt:
-            raise UserError(_("The user has not succeeded the exam"))
+            raise UserError(("The user has not succeeded the exam"))
 
         return self._generate_report(succeeded_attempt, download=True)

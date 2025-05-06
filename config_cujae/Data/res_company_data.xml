@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Compañía madre CUJAE -->
+    <data>
+        <record id="base.main_company" model="res.company">
+            <field name="name">CUJAE</field>
+            <field name="partner_id" ref="base.main_partner"/>
+            <field name="currency_id" ref="base.CUP"/>
+            <field name="sequence">1</field>
+            <field name="company_registry">CUJAE-12345</field>
+            <field name="phone">+53 7 12345678</field>
+            <field name="email">rector@cujae.edu.cu</field>
+            <field name="website">www.cujae.edu.cu</field>
+        </record>
+    </data>
+
+
+    <!-- Facultades como compañías hijas -->
+    <record id="company_arquitectura" model="res.company">
+        <field name="name">Arquitectura</field>
+        <field name="parent_id" ref="base.main_company"/>
+        <field name="currency_id" ref="base.CUP"/>
+        <field name="sequence">10</field>
+        <field name="phone">+53 7 12345678 ext.100</field>
+    </record>
+
+    <record id="company_automatica" model="res.company">
+        <field name="name">Automática</field>
+        <field name="parent_id" ref="base.main_company"/>
+        <field name="currency_id" ref="base.CUP"/>
+        <field name="sequence">20</field>
+        <field name="phone">+53 7 12345678 ext.200</field>
+    </record>
+
+    <record id="company_civil" model="res.company">
+        <field name="name">Civil</field>
+        <field name="parent_id" ref="base.main_company"/>
+        <field name="currency_id" ref="base.CUP"/>
+        <field name="sequence">30</field>
+        <field name="phone">+53 7 12345678 ext.300</field>
+    </record>
+
+    <record id="company_electrica" model="res.company">
+        <field name="name">Eléctrica</field>
+        <field name="parent_id" ref="base.main_company"/>
+        <field name="currency_id" ref="base.CUP"/>
+        <field name="sequence">40</field>
+        <field name="phone">+53 7 12345678 ext.400</field>
+    </record>
+
+    <record id="company_industrial" model="res.company">
+        <field name="name">Industrial</field>
+        <field name="parent_id" ref="base.main_company"/>
+        <field name="currency_id" ref="base.CUP"/>
+        <field name="sequence">50</field>
+        <field name="phone">+53 7 12345678 ext.500</field>
+    </record>
+
+    <record id="company_informatica" model="res.company">
+        <field name="name">Informática</field>
+        <field name="parent_id" ref="base.main_company"/>
+        <field name="currency_id" ref="base.CUP"/>
+        <field name="sequence">60</field>
+        <field name="phone">+53 7 12345678 ext.600</field>
+    </record>
+
+    <record id="company_mecanica" model="res.company">
+        <field name="name">Mecánica</field>
+        <field name="parent_id" ref="base.main_company"/>
+        <field name="currency_id" ref="base.CUP"/>
+        <field name="sequence">70</field>
+        <field name="phone">+53 7 12345678 ext.700</field>
+    </record>
+
+    <record id="company_quimica" model="res.company">
+        <field name="name">Química</field>
+        <field name="parent_id" ref="base.main_company"/>
+        <field name="currency_id" ref="base.CUP"/>
+        <field name="sequence">80</field>
+        <field name="phone">+53 7 12345678 ext.800</field>
+    </record>
+
+    <record id="company_telecomunicaciones" model="res.company">
+        <field name="name">Telecomunicaciones</field>
+        <field name="parent_id" ref="base.main_company"/>
+        <field name="currency_id" ref="base.CUP"/>
+        <field name="sequence">90</field>
+        <field name="phone">+53 7 12345678 ext.900</field>
+    </record>
+</odoo>

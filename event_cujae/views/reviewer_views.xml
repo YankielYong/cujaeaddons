@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_work_reviewer_form" model="ir.ui.view">
+     <field name="name">work.reviewer.form</field>
+     <field name="model">work.reviewer</field>
+     <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="work_id" readonly="1"/>
+                    <field name="reviewer_id" readonly="1"/>
+                    <field name="opinion"/>
+                    <field name="rating"/>
+                    <field name="attachment" filename="attachment_filename"/>
+                    <field name="attachment_filename" invisible="1"/>
+                </group>
+                </sheet>
+            </form>
+     </field>
+    </record>
+
+     <record id="action_reviewer_views" model="ir.actions.act_window">
+        <field name="name">Trabajos por Revisar</field>
+        <field name="res_model">work.reviewer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+   <menuitem name="Trabajos por Revisar"
+        id="event_cujae_reviewer_item_menu"
+        parent="event.event_main_menu"
+        sequence="4"
+        action="action_reviewer_views"/>
+</odoo>

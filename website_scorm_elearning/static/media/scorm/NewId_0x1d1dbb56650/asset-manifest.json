@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "@yield('content-viewer-url')/static/css/main.a9ee4666.chunk.css",
+    "main.js": "@yield('content-viewer-url')/static/js/main.b17894ef.chunk.js",
+    "main.js.map": "@yield('content-viewer-url')/static/js/main.b17894ef.chunk.js.map",
+    "runtime-main.js": "@yield('content-viewer-url')/static/js/runtime-main.eac69593.js",
+    "runtime-main.js.map": "@yield('content-viewer-url')/static/js/runtime-main.eac69593.js.map",
+    "static/css/2.37be29a2.chunk.css": "@yield('content-viewer-url')/static/css/2.37be29a2.chunk.css",
+    "static/js/2.461f92d8.chunk.js": "@yield('content-viewer-url')/static/js/2.461f92d8.chunk.js",
+    "static/js/2.461f92d8.chunk.js.map": "@yield('content-viewer-url')/static/js/2.461f92d8.chunk.js.map",
+    "index.html": "@yield('content-viewer-url')/index.html",
+    "precache-manifest.f1e4a1ef31c632fbdd7c5b4eaf057b7a.js": "@yield('content-viewer-url')/precache-manifest.f1e4a1ef31c632fbdd7c5b4eaf057b7a.js",
+    "service-worker.js": "@yield('content-viewer-url')/service-worker.js",
+    "static/css/2.37be29a2.chunk.css.map": "@yield('content-viewer-url')/static/css/2.37be29a2.chunk.css.map",
+    "static/css/main.a9ee4666.chunk.css.map": "@yield('content-viewer-url')/static/css/main.a9ee4666.chunk.css.map",
+    "static/js/2.461f92d8.chunk.js.LICENSE.txt": "@yield('content-viewer-url')/static/js/2.461f92d8.chunk.js.LICENSE.txt",
+    "static/media/trophy.a754c5ed.svg": "@yield('content-viewer-url')/static/media/trophy.a754c5ed.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.eac69593.js",
+    "static/css/2.37be29a2.chunk.css",
+    "static/js/2.461f92d8.chunk.js",
+    "static/css/main.a9ee4666.chunk.css",
+    "static/js/main.b17894ef.chunk.js"
+  ]
+}

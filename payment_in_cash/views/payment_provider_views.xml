@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cash_payment_provider_form" model="ir.ui.view">
+        <field name="name">Cash Provider Form</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position='inside'>
+                <group attrs="{'invisible': [('code', '!=', 'cash')]}">
+
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
+
+

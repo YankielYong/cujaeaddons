@@ -4,29 +4,8 @@ from odoo.osv import expression
 
 class SurveyUserInput(models.Model):
     _inherit = 'survey.user_input'
-
-    slide_id = fields.Many2one('slide.slide', 'Related course slide',
-        help="The related course slide when there is no membership information")
-    slide_partner_id = fields.Many2one('slide.slide.partner', 'Subscriber information',
-        help="Slide membership information for the logged in user",
-        index='btree_not_null') # index useful for deletions in comodel
     
     slide_exam = fields.Boolean('Examen completado', compute='_compute_exam_input', store=True)
-
-
-
-    @api.model_create_multi
-    def create(self, vals_list):
-        records = super(SurveyUserInput, self).create(vals_list)
-        records._check_for_failed_attempt()
-        return records
-
-    def write(self, vals):
-        res = super(SurveyUserInput, self).write(vals)
-        if 'state' in vals:
-            self._check_for_failed_attempt()
-        return res
-
     def _compute_exam_input(self):
         if self.slide_id.exam_id.exam==True:
             self.slide_exam=True
@@ -43,7 +22,8 @@ class SurveyUserInput(models.Model):
                 ('id', 'in', self.ids),
                 ('state', '=', 'done'),
                 ('scoring_success', '=', False),
-                ('slide_partner_id', '!=', False)
+                ('slide_partner_id', '!=', False),
+                ('survey_id.exam', '=', False)
             ])
 
             if user_inputs:
@@ -65,6 +45,8 @@ class SurveyUserInput(models.Model):
                         for partner_id, removed_memberships in removed_memberships_per_partner.items():
                             removed_memberships._remove_membership(partner_id.ids)
 
-                    # ¡Aquí añade la acción adicional que quieres realizar!
-                    # Ejemplo: Registra un evento en el sistema de logs
+class SurveyUserInputLine(models.Model):
+    _inherit = 'survey.user_input.line'
+    slide_partner_id= fields.Many2one(related='user_input_id.slide_partner_id', string='Partner', store=True, readonly=True)
+
                     

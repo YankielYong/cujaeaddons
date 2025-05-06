@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="email_template_survey_grade" model="mail.template">
+            <field name="name">Notificación de Calificación</field>
+            <field name="model_id" ref="survey.model_survey_user_input"/>
+            <field name="subject">Resultado de tu examen: {{ object.grade }}</field>
+            <field name="email_from">{{ user.email }}</field>
+            <!-- Usa partner_to en lugar de email_to para mejor manejo -->
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px; font-size: 13px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Hola <t t-out="object.partner_id.name or 'participante'"></t>,<br/><br/>
+                        La calificación de tu examen es: <strong><t t-out="object.grade"></t></strong>.<br/><br/>
+                        Saludos<br/>                        
+                    </p>
+                </div>
+            </field>
+            <!-- Opcional: Añade idioma y auto-delete -->
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

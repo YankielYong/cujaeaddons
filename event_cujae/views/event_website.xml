@@ -1,0 +1,17 @@
+<odoo>
+    <template id="custom_event_replacement" inherit_id="website_event.event_description_full">
+        <!-- Se reemplaza el <div name="event"> completo -->
+        <xpath expr="//div" position="replace">
+             <t t-if="event.event_type_id.name == 'Científico'">
+                    <t t-call="event_cujae.view_submission_page"/>
+                </t>
+
+                <!-- Mostrar la página normal para otros tipos de eventos -->
+                <t t-else="">
+                    <h1 t-field="event.name"/>
+                    <p t-field="event.description"/>
+                    <p>Fecha: <span t-field="event.date_begin"/></p>
+                </t>
+        </xpath>
+    </template>
+</odoo>

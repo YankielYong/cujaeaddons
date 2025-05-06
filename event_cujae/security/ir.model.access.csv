@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_event,Access to Event,model_event_event,,1,1,1,1
+access_university_faculty,Access to University Faculty,model_university_faculty,,1,1,1,1
+access_faculty_responsible,access_faculty_responsible,model_faculty_responsible,,1,1,1,1
+access_scientific_work,access_scientific_work,model_scientific_work,,1,1,1,1
+access_work_reviewer,access_work_reviewer,model_work_reviewer,,1,1,1,1

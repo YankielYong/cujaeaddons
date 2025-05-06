@@ -1,10 +1,14 @@
 from odoo import models, fields, api
+from datetime import datetime, timedelta
+from odoo.exceptions import UserError
+
 class SlidePartnerRelation(models.Model):
     _inherit = 'slide.slide.partner'
 
     user_input_ids = fields.One2many('survey.user_input', 'slide_partner_id', 'Intentos de examen')
     exam_scoring_success = fields.Boolean('Examen completado', compute='_compute_survey_scoring_success', store=True)
-
+    compute_survey_completed=fields.Boolean(string="Completed",compute="_compute_completed",store=True,help="True si el usuario completó al menos un intento de la encuesta."
+)
     @api.depends('partner_id', 'user_input_ids.scoring_success')
     def _compute_exam_scoring_success(self):
         succeeded_user_inputs = self.env['survey.user_input'].sudo().search([
@@ -14,16 +18,26 @@ class SlidePartnerRelation(models.Model):
         succeeded_slide_partners = succeeded_user_inputs.mapped('slide_partner_id')
         for record in self:
             record.exam_scoring_success = record in succeeded_slide_partners
-            
+                
+    @api.depends('user_input_ids.state')
+    def _compute_completed(self):
+        for record in self:
+            # Verificar si existe al menos un intento en estado 'done'
+            record.compute_survey_completed = bool(
+                self.env['survey.user_input'].sudo().search_count([
+                    ('slide_partner_id', '=', record.id),
+                    ('state', '=', 'done')
+                ], limit=1)
+            )
 
     def _compute_field_value(self, field):
         super()._compute_field_value(field)
         if field.name == 'survey_scoring_success':
-            self.filtered('survey_scoring_success').write({
-                'completed': True
-            })
-            if self.completed==True:
-                self.slide_id.env.user.sudo().add_karma(self.slide_id.karma_for_completion)
+            # Iterar sobre cada registro en self
+            for record in self:
+                if record.survey_scoring_success:
+                    record.complete=True
+                    record.slide_id.env.user.sudo().add_karma(record.slide_id.karma_for_completion)
             
 
             
@@ -32,7 +46,6 @@ class SlidePartnerRelation(models.Model):
 class Slide(models.Model):
     _inherit = 'slide.slide'
 
-    name = fields.Char(compute='_compute_name', readonly=False, store=True)
     slide_category = fields.Selection(selection_add=[
         ('exam', 'Examen')
     ], ondelete={'exam': 'set default'})
@@ -43,8 +56,10 @@ class Slide(models.Model):
     nbr_exam = fields.Integer("Number of exams", compute='_compute_slides_statistics', store=True)
     # small override of 'is_preview' to uncheck it automatically for slides of type 'exam'
     is_preview = fields.Boolean(compute='_compute_is_preview', readonly=False, store=True)
-    karma_for_completion=fields.Integer("Karma ganado al completar", compute='_compute_karma_gain_slide',readonly=False, store=True)
-  
+    karma_for_completion=fields.Integer("Karma ganado al completar",readonly=False, store=True)
+    availability_start_date = fields.Datetime(string="Fecha de Inicio de Disponibilidad", default=fields.Datetime.now)  # Cambio a Datetime
+    availability_end_date = fields.Datetime(string="Fecha de Fin de Disponibilidad")  # Cambio a Datetime
+
 
     @api.depends('exam_id')
     def _compute_name(self):
@@ -57,33 +72,73 @@ class Slide(models.Model):
         slides_exam.can_self_mark_uncompleted = False
         slides_exam.can_self_mark_completed = False
         super(Slide, self - slides_exam)._compute_mark_complete_actions()
-    
-    
-    def _action_mark_completed(self):
-        
-        uncompleted_slides = self.filtered(lambda slide: not slide.user_has_completed)
-        self.env.user.sudo().add_karma(self.karma_for_completion)
-        target_partner = self.env.user.partner_id
-        uncompleted_slides._action_set_quiz_done()
-        SlidePartnerSudo = self.env['slide.slide.partner'].sudo()
-        existing_sudo = SlidePartnerSudo.search([
-            ('slide_id', 'in', uncompleted_slides.ids),
-            ('partner_id', '=', target_partner.id)
-        ])
-        existing_sudo.write({'completed': True})
-
-        new_slides = uncompleted_slides.sudo() - existing_sudo.mapped('slide_id')
-        SlidePartnerSudo.create([{
-            'slide_id': new_slide.id,
-            'channel_id': new_slide.channel_id.id,
-            'partner_id': target_partner.id,
-            'vote': 0,
-            'completed': True} for new_slide in new_slides])
-
             
 
+    @api.model
+    def _cron_check_slide_availability(self):
+        """
+        Función que se ejecuta diariamente mediante un cron job para verificar la disponibilidad de los contenidos.
+        Actualiza el campo 'is_published' basándose en las fechas de disponibilidad.
+        """
+        today = datetime.now()
+        slides = self.search([])  # Busca todos los cursos (slide.channel)
+        for slide in slides:
+            if slide.availability_start_date and slide.availability_end_date:
+                if slide.availability_start_date <= today <= slide.availability_end_date:
+                    if not slide.is_published:
+                        slide.write({'is_published': True})
+                else:
+                    if slide.is_published:
+                        slide.write({'is_published': False})
+            elif slide.availability_start_date: #Solo fecha de inicio
+                if slide.availability_start_date <= today:
+                    if not slide.is_published:
+                        slide.write({'is_published': True})
+                else:
+                    if slide.is_published:
+                        slide.write({'is_published': False})
+            elif slide.availability_end_date: #Solo fecha de fin
+                if today <= slide.availability_end_date:
+                    if not slide.is_published:
+                        slide.write({'is_published': True})
+                else:
+                    if slide.is_published:
+                        slide.write({'is_published': False})
+
+    @api.onchange('availability_start_date', 'availability_end_date')
+    def _check_availability_dates(self):
+        """
+        Validación para asegurar que la fecha de inicio no sea posterior a la fecha de fin.
+        """
+        for record in self:
+            if record.availability_start_date and record.availability_end_date and record.availability_start_date > record.availability_end_date:
+                raise UserError("La fecha de inicio de disponibilidad no puede ser posterior a la fecha de fin.")
      
 
+    @api.onchange('availability_start_date', 'availability_end_date')
+    def _onchange_availability_dates(self):
+        """
+        Actualiza el estado de 'is_published' cuando cambian las fechas de disponibilidad directamente en el formulario.
+        """
+        today = datetime.now()
+        if self.availability_start_date and self.availability_end_date:
+            if self.availability_start_date <= today <= self.availability_end_date:
+                self.is_published = True
+            else:
+                self.is_published = False
+        elif self.availability_start_date: #Solo fecha de inicio
+            if self.availability_start_date <= today:
+                self.is_published = True
+            else:
+                self.is_published = False
+        elif self.availability_end_date: #Solo fecha de fin
+            if today <= self.availability_end_date:
+                self.is_published = True
+            else:
+                self.is_published = False
+        else:
+            # Si no hay fechas, no cambiar el estado actuall
+            pass
      
 
     @api.depends('slide_category')
